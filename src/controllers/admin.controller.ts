@@ -45,7 +45,7 @@ class AdminController {
       const slot = await Slot.findOneBy({ id: slot_id });
       if (!slot) {
         slot_not_found = slot_id;
-        break
+        break;
       }
       slots.push(slot);
     }
@@ -60,9 +60,9 @@ class AdminController {
       const faculty = await Faculty.findOneBy({ id: faculty_id });
       if (!faculty) {
         faculty_not_found = faculty_id;
-        break
+        break;
       }
-      faculties.push(faculty); 
+      faculties.push(faculty);
     }
 
     if (faculty_not_found) {

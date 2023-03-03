@@ -24,13 +24,15 @@ const schemas = {
     id: Joi.string().required(),
     timings: Joi.array().items(
       Joi.object({
-        day: Joi.string().valid(
-          constants.MON,
-          constants.TUE,
-          constants.WED,
-          constants.THU,
-          constants.FRI
-        ).required(),
+        day: Joi.string()
+          .valid(
+            constants.MON,
+            constants.TUE,
+            constants.WED,
+            constants.THU,
+            constants.FRI
+          )
+          .required(),
         start: Joi.string()
           .required()
           .regex(/^[0-1]?\d:\d{2} ?(AM|PM)$/),
