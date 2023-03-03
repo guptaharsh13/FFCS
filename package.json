@@ -1,0 +1,44 @@
+{
+  "name": "vit-hiring-2023-phase-1-guptaharsh13",
+  "version": "1.0.0",
+  "description": "[![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-c66648af7eb3fe8bc4f294546bfd86ef473780cde1dea487d3c4ff354943c9ae.svg)](https://classroom.github.com/online_ide?assignment_repo_id=10357716&assignment_repo_type=AssignmentRepo) <!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 --> <a name=\"readme-top\"></a> <!-- *** Thanks for checking out the Best-README-Template. If you have a suggestion *** that would make this better, please fork the repo and create a pull request *** or simply open an issue with the tag \"enhancement\". *** Don't forget to give the project a star! *** Thanks again! Now go create something AMAZING! :D -->",
+  "main": "index.js",
+  "scripts": {
+    "build": "rimraf dist && npx tsc",
+    "prestart": "npm run build",
+    "start": "node dist/index.js",
+    "preserve": "npm run build",
+    "serve": "concurrently \"npx tsc -w\" \"nodemon dist/index.js\" ",
+    "lint": "eslint . --ext .ts",
+    "prepare": "husky install",
+    "check-types": "npx tsc --pretty --noEmit",
+    "check-format": "npx prettier --check .",
+    "format": "npx prettier --write ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dyte-submissions/vit-hiring-2023-phase-1-guptaharsh13.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dyte-submissions/vit-hiring-2023-phase-1-guptaharsh13/issues"
+  },
+  "homepage": "https://github.com/dyte-submissions/vit-hiring-2023-phase-1-guptaharsh13#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "typescript": "^4.9.5",
+    "@types/express": "^4.17.17",
+    "@types/node": "^18.14.5",
+    "rimraf": "^4.2.0",
+    "eslint": "^8.35.0",
+    "@typescript-eslint/parser": "^5.54.0",
+    "@typescript-eslint/eslint-plugin": "^5.54.0",
+    "prettier": "^2.8.4",
+    "eslint-config-prettier": "^8.6.0",
+    "husky": "^8.0.0"
+  }
+}
