@@ -22,4 +22,20 @@ const bodyValidator =
     }
   };
 
-export default bodyValidator;
+const paramValidator =
+  (paramSchema: any) =>
+  async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    const { error } = paramSchema.validate(req.params);
+    if (error == null) {
+      next();
+    } else {
+      const { details } = error;
+      const errorMessages = details
+        .map((i: Record<string, unknown>) => i.message)
+        .join(",");
+
+      unprocessableEntryResponse(res, errorMessages);
+    }
+  };
+
+export { bodyValidator, paramValidator };

@@ -7,6 +7,7 @@ import cors from "cors";
 import morgan from "morgan";
 
 import { DataSource } from "typeorm";
+import { ClashedSlot } from "./entities/ClashedSlot";
 import { Course } from "./entities/Course";
 import { Faculty } from "./entities/Faculty";
 import { Slot } from "./entities/Slot";
@@ -14,6 +15,8 @@ import { Student } from "./entities/Student";
 import { Timing } from "./entities/Timing";
 
 import adminRouter from "./routes/admin";
+import facultyRouter from "./routes/faculty";
+import courseRouter from "./routes/course";
 
 const app: Express = express();
 
@@ -25,6 +28,8 @@ app.use(express.json());
 app.use(cors());
 
 app.use("/admin", adminRouter);
+app.use("/faculty", facultyRouter);
+app.use("/course", courseRouter);
 
 console.log(
   "🚧 Starting ",
@@ -39,7 +44,7 @@ const AppDataSource = new DataSource({
   username: process.env.POSTGRES_USER,
   password: process.env.POSTGRES_PASSWORD,
   database: process.env.POSTGRES_DB,
-  entities: [Course, Faculty, Slot, Student, Timing],
+  entities: [ClashedSlot, Course, Faculty, Slot, Student, Timing],
   synchronize: true,
 });
 

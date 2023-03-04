@@ -42,6 +42,20 @@ const schemas = {
       }).required()
     ),
   }),
+
+  getFaculty: Joi.object({
+    faculty_id: Joi.string().required(),
+  }),
+
+  getCourse: Joi.object({
+    id: Joi.string().required(),
+  }),
+
+  registerCourse: Joi.object({
+    course_id: Joi.string().required(),
+    faculty_id: Joi.string().required(),
+    slot_ids: Joi.array().items(Joi.string().required()).required(),
+  }),
 };
 
 export default schemas;

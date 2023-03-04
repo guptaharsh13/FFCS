@@ -1,10 +1,4 @@
-import {
-  Entity,
-  BaseEntity,
-  PrimaryColumn,
-  OneToMany,
-  ManyToMany,
-} from "typeorm";
+import { Entity, BaseEntity, PrimaryColumn, ManyToMany } from "typeorm";
 
 import { Timing } from "./Timing";
 import { Course } from "./Course";
@@ -14,7 +8,7 @@ export class Slot extends BaseEntity {
   @PrimaryColumn()
   id: string;
 
-  @OneToMany(() => Timing, (timing) => timing.slot)
+  @ManyToMany(() => Timing, (timing) => timing.slots)
   timings: Timing[];
 
   @ManyToMany(() => Course, (course) => course.allowed_slots)

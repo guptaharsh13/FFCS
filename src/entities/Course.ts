@@ -11,8 +11,8 @@ import { Slot } from "./Slot";
 import { Student } from "./Student";
 
 export enum CourseType {
-  THEORY,
-  LAB,
+  THEORY = "THEORY",
+  LAB = "LAB",
 }
 
 @Entity("course")
