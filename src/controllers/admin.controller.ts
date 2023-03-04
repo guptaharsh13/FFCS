@@ -9,7 +9,7 @@ import { Timing } from "../entities/Timing";
 import { ClashedSlot } from "../entities/ClashedSlot";
 import { LessThanOrEqual, MoreThanOrEqual } from "typeorm";
 
-import { dayMap, parseTime, checkClash } from "../core/utils";
+import { dayMap, parseTime, checkClash } from "../utils/utils";
 
 class AdminController {
   createFaculty = async (data: {

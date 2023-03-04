@@ -1,13 +1,18 @@
 import { Course } from "../entities/Course";
+import { Slot } from "../entities/Slot";
 import { Student } from "../entities/Student";
-import { checkClash } from "../core/utils";
+import { checkClash } from "../utils/utils";
+import { User } from "../entities/User";
 
 class RegisterController {
-  registerCourse = async (data: {
-    course_id: string;
-    faculty_id: string;
-    slot_ids: string[];
-  }): Promise<Student> => {
+  registerCourse = async (
+    data: {
+      course_id: string;
+      faculty_id: string;
+      slot_ids: string[];
+    },
+    user: Express.User | undefined
+  ): Promise<Student> => {
     const { course_id, faculty_id, slot_ids } = data;
 
     const course = await Course.findOneBy({ id: course_id });
@@ -23,13 +28,18 @@ class RegisterController {
       throw new Error("Course not available in this slot");
     }
 
-    const student_id = ""; // from req
-    const student = await Student.findOneBy({ id: student_id });
+    if (!user) {
+      throw new Error("User not found");
+    }
+    const registration_number = (user as User).registration_number;
+    const student = await Student.findOneBy({ id: registration_number });
     if (!student) {
-      throw new Error(`Student not found`);
+      throw new Error("Student not found");
     }
     if (
-      student.registered_courses.map((course) => course.id).includes(course_id)
+      student.registered_courses
+        .map((course: Course) => course.id)
+        .includes(course_id)
     ) {
       throw new Error("Course already registered");
     }
@@ -37,10 +47,13 @@ class RegisterController {
     const slots = course.allowed_slots.map((slot) => slot.id);
     for (const registered_course of student.registered_courses) {
       const registered_slots = registered_course.allowed_slots.map(
-        (slot) => slot.id
+        (slot: Slot) => slot.id
       );
+      // almost constant time complexity
+      // because slots and registered_slots would contain limited number of elements only
       for (const slot of slots) {
         for (const registered_slot of registered_slots) {
+          // checkClash can query the database in almost constant time
           if (await checkClash(slot, registered_slot)) {
             throw new Error(`Slot id ${slot} clashed with ${registered_slot}`);
           }
@@ -49,7 +62,7 @@ class RegisterController {
     }
 
     await Student.update(
-      { id: student_id },
+      { id: student.id },
       { registered_courses: [...student.registered_courses, course] }
     );
     return student;

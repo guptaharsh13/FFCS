@@ -5,7 +5,7 @@ import AdminController from "../controllers/admin.controller";
 import ApiResponse from "../core/ApiResponse";
 import schemas from "../middleware/schema";
 import { bodyValidator } from "../middleware/validation";
-import { sanitize } from "../core/utils";
+import { sanitize } from "../utils/utils";
 
 const adminRouter = Router();
 const { createFaculty, createCourse, createStudent, createSlot } =

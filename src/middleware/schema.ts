@@ -1,5 +1,5 @@
 import * as Joi from "joi";
-import constants from "../constants";
+import constants from "../utils/constants";
 
 const schemas = {
   createFaculty: Joi.object({
@@ -55,6 +55,17 @@ const schemas = {
     course_id: Joi.string().required(),
     faculty_id: Joi.string().required(),
     slot_ids: Joi.array().items(Joi.string().required()).required(),
+  }),
+
+  register: Joi.object({
+    registration_number: Joi.string().required(),
+    password: Joi.string().required(),
+    role: Joi.string().valid(constants.ADMIN, constants.STUDENT).required(),
+  }),
+
+  login: Joi.object({
+    registration_number: Joi.string().required(),
+    password: Joi.string().required(),
   }),
 };
 
