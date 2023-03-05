@@ -34,7 +34,7 @@ const config: dbConfig = {
   synchronize: true,
 };
 
-if (Boolean(process.env.REQUIRE_SSL) === true) {
+if (process.env.POSTGRES_SSL === "require") {
   config.ssl = true;
 }
 

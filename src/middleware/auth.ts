@@ -9,8 +9,9 @@ const isAdmin = (req: Request, res: Response, next: NextFunction): void => {
     const role = (req.user as User).role;
     if (role === Role.ADMIN) {
       next();
+    } else {
+      forbiddenResponse(res, "Forbidden");
     }
-    forbiddenResponse(res, "Forbidden");
   } catch {
     authFaliureResponse(res, "Unauthorized");
   }
@@ -21,8 +22,9 @@ const isStudent = (req: Request, res: Response, next: NextFunction): void => {
     const role = (req.user as User).role;
     if (role === Role.STUDENT) {
       next();
+    } else {
+      forbiddenResponse(res, "Forbidden");
     }
-    forbiddenResponse(res, "Forbidden");
   } catch {
     authFaliureResponse(res, "Unauthorized");
   }
@@ -35,10 +37,13 @@ const isAdminOrStudent = (
 ): void => {
   try {
     const role = (req.user as User).role;
+    console.log(role);
+    console.log(role === Role.ADMIN);
     if (role === Role.ADMIN || role === Role.STUDENT) {
       next();
+    } else {
+      forbiddenResponse(res, "Forbidden");
     }
-    forbiddenResponse(res, "Forbidden");
   } catch {
     authFaliureResponse(res, "Unauthorized");
   }

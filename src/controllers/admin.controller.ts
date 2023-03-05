@@ -127,10 +127,15 @@ class AdminController {
       }
 
       clashedTimings.push(
-        ...(await Timing.findBy({
-          day: dayMap[day],
-          start: LessThanOrEqual(endTime),
-          end: MoreThanOrEqual(startTime),
+        ...(await Timing.find({
+          relations: {
+            slots: true,
+          },
+          where: {
+            day: dayMap[day],
+            start: LessThanOrEqual(endTime),
+            end: MoreThanOrEqual(startTime),
+          },
         }))
       );
 
@@ -146,18 +151,8 @@ class AdminController {
 
     const clashed_slot_ids: Set<string> = new Set();
     for (const clashedTiming of clashedTimings) {
-      const temp = await Timing.findOne({
-        relations: {
-          slots: true,
-        },
-        where: {
-          id: clashedTiming.id,
-        },
-      });
-      if (temp) {
-        for (const clashed_slot of temp.slots) {
-          clashed_slot_ids.add(clashed_slot.id);
-        }
+      for (const clashed_slot of clashedTiming.slots) {
+        clashed_slot_ids.add(clashed_slot.id);
       }
     }
 

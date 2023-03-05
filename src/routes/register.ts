@@ -12,11 +12,13 @@ const { successResponse, badRequestResponse } = new ApiResponse();
 
 registerRouter.post(
   "/",
-  bodyValidator(schemas.register),
+  bodyValidator(schemas.registerCourse),
   async (req: Request, res: Response) => {
     try {
       successResponse(res, await registerCourse(req.body, req.user));
     } catch (error: any) {
+      console.log(error.message);
+      // console.log(error);
       badRequestResponse(res, error.message);
     }
   }
