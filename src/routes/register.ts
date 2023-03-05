@@ -17,8 +17,6 @@ registerRouter.post(
     try {
       successResponse(res, await registerCourse(req.body, req.user));
     } catch (error: any) {
-      console.log(error.message);
-      // console.log(error);
       badRequestResponse(res, error.message);
     }
   }

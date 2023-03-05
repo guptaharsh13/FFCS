@@ -19,7 +19,7 @@ export enum Day {
 
 @Entity("timing")
 export class Timing extends BaseEntity {
-  @PrimaryGeneratedColumn("uuid")
+  @PrimaryGeneratedColumn()
   id: string;
 
   @Index()

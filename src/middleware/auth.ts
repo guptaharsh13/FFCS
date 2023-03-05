@@ -37,7 +37,6 @@ const isAdminOrStudent = (
 ): void => {
   try {
     const role = (req.user as User).role;
-    console.log(role);
     console.log(role === Role.ADMIN);
     if (role === Role.ADMIN || role === Role.STUDENT) {
       next();

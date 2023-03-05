@@ -2,9 +2,9 @@ import {
   Entity,
   BaseEntity,
   Column,
-  JoinTable,
   OneToOne,
   PrimaryColumn,
+  JoinColumn,
 } from "typeorm";
 
 import { Student } from "./Student";
@@ -20,7 +20,7 @@ export class User extends BaseEntity {
   registration_number: string;
 
   @OneToOne(() => Student, { nullable: true })
-  @JoinTable()
+  @JoinColumn()
   student: Student;
 
   @Column({

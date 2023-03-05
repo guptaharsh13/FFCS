@@ -8,7 +8,7 @@ const timetableRouter = Router();
 const { getTimetable } = new TimetableController();
 const { successResponse, badRequestResponse } = new ApiResponse();
 
-timetableRouter.post("/", async (req: Request, res: Response) => {
+timetableRouter.get("/", async (req: Request, res: Response) => {
   try {
     successResponse(res, await getTimetable(req.user));
   } catch (error: any) {

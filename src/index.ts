@@ -16,7 +16,7 @@ import userRouter from "./routes/user";
 import registerRouter from "./routes/register";
 import timetableRouter from "./routes/timetable";
 
-import { isAdmin, isAdminOrStudent, isStudent } from "./middleware/auth";
+import { isAdmin, isStudent } from "./middleware/auth";
 
 const app: Express = express();
 
@@ -33,8 +33,8 @@ app.use(cors());
 const authenticate = passport.authenticate("jwt", { session: false });
 
 app.use("/admin", authenticate, isAdmin, adminRouter);
-app.use("/faculty", authenticate, isAdminOrStudent, facultyRouter);
-app.use("/course", authenticate, isAdminOrStudent, courseRouter);
+app.use("/faculty", authenticate, isStudent, facultyRouter);
+app.use("/course", authenticate, isStudent, courseRouter);
 app.use("/register", authenticate, isStudent, registerRouter);
 app.use("/timetable", authenticate, isStudent, timetableRouter);
 app.use("/user", userRouter);

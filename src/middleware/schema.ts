@@ -48,7 +48,7 @@ const schemas = {
   }),
 
   getCourse: Joi.object({
-    id: Joi.string().required(),
+    course_id: Joi.string().required(),
   }),
 
   registerCourse: Joi.object({

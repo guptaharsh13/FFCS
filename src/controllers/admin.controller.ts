@@ -10,6 +10,13 @@ import { ClashedSlot } from "../entities/ClashedSlot";
 import { LessThanOrEqual, MoreThanOrEqual } from "typeorm";
 
 import { dayMap, parseTime, checkClash } from "../utils/utils";
+import { ICourse, courseResponse } from "../core/CourseResponse";
+import { ISlot, slotResponse } from "../core/SlotResponse";
+
+interface IStudentResponse {
+  id: string;
+  name: string;
+}
 
 class AdminController {
   createFaculty = async (data: {
@@ -36,7 +43,7 @@ class AdminController {
     slot_ids: string[];
     faculty_ids: string[];
     course_type: CourseType;
-  }): Promise<Course> => {
+  }): Promise<ICourse> => {
     const { id, name, slot_ids, faculty_ids, course_type } = data;
 
     if (await Course.findOneBy({ id })) {
@@ -80,13 +87,25 @@ class AdminController {
       course_type,
     });
     await course.save();
-    return course;
+    const res = await Course.findOne({
+      relations: {
+        allowed_slots: {
+          timings: true,
+        },
+        faculties: true,
+      },
+      where: { id: course.id },
+    });
+    if (!res) {
+      throw new Error("Course not created");
+    }
+    return courseResponse(res);
   };
 
   createStudent = async (data: {
     id: string;
     name: string;
-  }): Promise<Student> => {
+  }): Promise<IStudentResponse> => {
     const { id, name } = data;
 
     if (await Student.findOneBy({ id })) {
@@ -99,13 +118,16 @@ class AdminController {
     });
 
     await student.save();
-    return student;
+    return {
+      id: student.id,
+      name: student.name,
+    };
   };
 
   createSlot = async (data: {
     id: string;
     timings: { day: string; start: string; end: string }[];
-  }): Promise<Slot> => {
+  }): Promise<ISlot> => {
     const { id, timings } = data;
 
     if (await Slot.findOneBy({ id })) {
@@ -177,7 +199,7 @@ class AdminController {
 
     slot.timings = createdTimings;
     await slot.save();
-    return slot;
+    return slotResponse(slot);
   };
 }
 

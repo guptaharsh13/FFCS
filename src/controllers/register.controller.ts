@@ -4,6 +4,7 @@ import { Student } from "../entities/Student";
 import { checkClash } from "../utils/utils";
 import { User } from "../entities/User";
 import { RegisteredCourse } from "../entities/RegisteredCourse";
+import { IStudent, studentResponse } from "../core/StudentResponse";
 
 class RegisterController {
   registerCourse = async (
@@ -13,7 +14,7 @@ class RegisterController {
       slot_ids: string[];
     },
     user: Express.User | undefined
-  ): Promise<Student> => {
+  ): Promise<IStudent> => {
     const { course_id, faculty_id, slot_ids } = data;
 
     const course = await Course.findOne({
@@ -54,8 +55,15 @@ class RegisterController {
     const student = await Student.findOne({
       relations: {
         registered_courses: {
-          course: true,
-          slots: true,
+          course: {
+            faculties: true,
+            allowed_slots: {
+              timings: true,
+            },
+          },
+          slots: {
+            timings: true,
+          },
         },
       },
       where: { id: registration_number },
@@ -97,7 +105,27 @@ class RegisterController {
     });
     student.registered_courses.push(registeredCourse);
     await student.save();
-    return student;
+
+    const res = await Student.findOne({
+      relations: {
+        registered_courses: {
+          course: {
+            faculties: true,
+            allowed_slots: {
+              timings: true,
+            },
+          },
+          slots: {
+            timings: true,
+          },
+        },
+      },
+      where: { id: student.id },
+    });
+    if (!res) {
+      throw new Error("Student not created");
+    }
+    return studentResponse(res);
   };
 }
 

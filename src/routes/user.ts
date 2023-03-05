@@ -30,7 +30,7 @@ userRouter.post(
     try {
       successResponse(res, await login(req.body));
     } catch (error: any) {
-      authFaliureResponse(res, error);
+      authFaliureResponse(res, error.message);
     }
   }
 );

@@ -11,6 +11,10 @@ class UserController {
   }): Promise<User> => {
     const { registration_number, password, role } = data;
 
+    if (await User.findOneBy({ registration_number })) {
+      throw new Error(`User id ${registration_number} already exists`);
+    }
+
     const { salt, hash } = genPassword(password);
     const user = User.create({
       registration_number,
@@ -23,7 +27,6 @@ class UserController {
     if (student) {
       user.student = student;
     }
-
     await user.save();
     return user;
   };
@@ -41,7 +44,7 @@ class UserController {
     }
 
     const token = issueJWT(user);
-    return { token };
+    return token;
   };
 }
 
