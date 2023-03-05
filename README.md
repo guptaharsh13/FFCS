@@ -55,10 +55,29 @@ This project will create a web application that will allow administrators to con
 
 Link: [http://20.239.186.235](http://20.239.186.235/)
 
-```
-STUDENT_AUTH_TOKEN=
-ADMIN_AUTH_TOKEN=
-```
+<details>
+      <summary>Auth Tokens</summary>
+      <ol style="list-style: none">
+        <li>
+          <details>
+            <summary>STUDENT_AUTH_TOKEN</summary>
+            <p>
+              Bearer
+              eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyMEJDSTAzMzQiLCJpYXQiOjE2NzgwMzk3MjY1NzJ9.bGJjmThKnrIuy0FLHNgUBt7BAa9iAtjwkqKhRVffNNNIJcH-X7P8xhK9XJ7vciOENZ6o6GqH_Yvsb-VnktWF-KxtMe2PW6ac-3_L3u2F_CHGrmZt_zLXoK6ObF5yQss0UIFxi9rwlMRdUTsvK0zaG5lYMp7TrOzxr06vUnk01HtAlVxt6z08DdMWzl2Drt4jIJwViYJvkGOiUOknSzrYEgjkofvkg4xuPi9Mlol7F_tZbehhwpo-7bi8FGCg1FnfqboXP-OZydtDJk8S_zVbIZ_wKe3KyqchS3dpcqZ1SZIcW0alujLKUcXZhe7GaTFqxIQqGl0-Gy7wJEjcMRScyrh38FvV4zWjwfD73Qo23uzkq41No4j2DFue7qvMze4FMdUSkVOTi2mBWmSoG0I-qfoXsnUyxU2sy3vP0dtnP3QemOzCwSuZSp2C19d5WnPKfJFwRjbGZzgBJYeAB408EQo7qvM1IeJQXhDXPIcCpjDxXTXX1unvU5Ql91IhxyonKQqf2_Lu9QAZfsg-o0Bt9G3XRTU3CqEvxGIFlxmWeJdBKJ-Twx-51pX7cpSeWDsTFfmCn0wdrPhINLRWlBv432FSntYjVYs84zhP2yT5JzCyKKUTx0ETf5aRnvNa7QRU3esy4nq6r4BJLZqLUDFsgHKlIAcELs1CFnblu81Jq7k
+            </p>
+          </details>
+        </li>
+        <li>
+          <details>
+            <summary>ADMIN_AUTH_TOKEN</summary>
+            <p>
+              Bearer
+              eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY3ODAzOTcyNTM3OH0.LGhQLu565cMEciCQX0CyzcD7YAoakQgIY9_XaCZmayCHFMoMHI4KqBwH96999hOddQJNJCZB_v-MCetAs2G1wBOGbRiUv4-_hL98Kz52kzZxyGLo28ZOVt6DHDYvYStRFc8kWiJldjjqPhxkrO0BgDvtwJN02vYMTAS3PN6dGpjLYAKbKOQFZNdpJ2-GqIqY9lF2ZQ1dQIs543FFYRbk0Bs5CIINmutLVZStyXN3JBh4mItZCfOQ6rs5dS6BMlakG8ln4EbIMBJ-b8yWbIOy5xczrWbjmw9usQO3qMjl95iELbpf036ARD3M2PhtVSs1jMB-M1r-TMvXpPdVAQPBX0lCmoMCI_bJry6BnzxCUFrHWqZf3BJgVsNUbZ3qnAPEbfAoyfAn1ZOF47eiUWWqqeRCK7-kNb_oCetuB8umtq50x09RE2pGt98mKAMvAfvbtw7zuIEKZYSjSVrF5daXtKKYJDNo3hMChK4P5M2o898RvknKxrYuh8GRLYW0FS-FOdLIJIk_TG2hvm74gPlBpZK801hmjrdLQ9CZznCfFVGjHYB4CMAS8rNx3cXzF-Rk-P-dL9lHhjdYTgN3h9fBoJNhmWZDSOjJofcDF1Sb4qpoNahpLqCvBqovSROmBOMas7YlYfUr7gwjZNh48_SxRqeq7DPajfG62R8qM5WB4SM
+            </p>
+          </details>
+        </li>
+      </ol>
+    </details>
 
 (only for the above link)
 
@@ -155,7 +174,7 @@ PORT: You must have already specified in the .env file (3000 by default)
 
 ## Design Document
 
-You may read more about the implementation of the project [here]().
+You may read more about the implementation of the project [here](https://harshgupta13.notion.site/Implementation-bc7406f5b5ae45208daf965478839706).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
