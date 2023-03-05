@@ -3,6 +3,7 @@ import { Slot } from "../entities/Slot";
 import { Student } from "../entities/Student";
 import { checkClash } from "../utils/utils";
 import { User } from "../entities/User";
+import { RegisteredCourse } from "../entities/RegisteredCourse";
 
 class RegisterController {
   registerCourse = async (
@@ -37,6 +38,15 @@ class RegisterController {
       }
     }
 
+    const slots: Slot[] = [];
+    for (const slot_id of slot_ids) {
+      const slot = await Slot.findOneBy({ id: slot_id });
+      if (!slot) {
+        throw new Error(`Slot id ${slot_id} not found`);
+      }
+      slots.push(slot);
+    }
+
     if (!user) {
       throw new Error("User not found");
     }
@@ -44,7 +54,8 @@ class RegisterController {
     const student = await Student.findOne({
       relations: {
         registered_courses: {
-          allowed_slots: true,
+          course: true,
+          slots: true,
         },
       },
       where: { id: registration_number },
@@ -54,14 +65,16 @@ class RegisterController {
     }
     if (
       student.registered_courses
-        .map((course: Course) => course.id)
+        .map(
+          (registered_course: RegisteredCourse) => registered_course.course.id
+        )
         .includes(course_id)
     ) {
       throw new Error("Course already registered");
     }
 
     for (const registered_course of student.registered_courses) {
-      const registered_slots = registered_course.allowed_slots.map(
+      const registered_slots = registered_course.slots.map(
         (slot: Slot) => slot.id
       );
       // almost constant time complexity
@@ -78,7 +91,11 @@ class RegisterController {
       }
     }
 
-    student.registered_courses.push(course);
+    const registeredCourse = RegisteredCourse.create({
+      course,
+      slots,
+    });
+    student.registered_courses.push(registeredCourse);
     await student.save();
     return student;
   };

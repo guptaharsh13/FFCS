@@ -10,6 +10,7 @@ import { Slot } from "../entities/Slot";
 import { Student } from "../entities/Student";
 import { Timing } from "../entities/Timing";
 import { User } from "../entities/User";
+import { RegisteredCourse } from "../entities/RegisteredCourse";
 
 interface dbConfig {
   type: string;
@@ -30,7 +31,16 @@ const config: dbConfig = {
   username: process.env.POSTGRES_USER,
   password: process.env.POSTGRES_PASSWORD,
   database: process.env.POSTGRES_DB,
-  entities: [ClashedSlot, Course, Faculty, Slot, Student, Timing, User],
+  entities: [
+    ClashedSlot,
+    Course,
+    Faculty,
+    Slot,
+    Student,
+    Timing,
+    User,
+    RegisteredCourse,
+  ],
   synchronize: true,
 };
 

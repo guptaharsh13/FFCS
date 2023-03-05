@@ -2,6 +2,7 @@ import { Entity, BaseEntity, PrimaryColumn, ManyToMany } from "typeorm";
 
 import { Timing } from "./Timing";
 import { Course } from "./Course";
+import { RegisteredCourse } from "./RegisteredCourse";
 
 @Entity("slot")
 export class Slot extends BaseEntity {
@@ -13,4 +14,10 @@ export class Slot extends BaseEntity {
 
   @ManyToMany(() => Course, (course) => course.allowed_slots)
   courses: Course[];
+
+  @ManyToMany(
+    () => RegisteredCourse,
+    (registered_course) => registered_course.slots
+  )
+  registered_courses: RegisteredCourse[];
 }

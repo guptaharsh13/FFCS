@@ -5,8 +5,10 @@ import {
   PrimaryColumn,
   ManyToMany,
   JoinTable,
+  OneToMany,
 } from "typeorm";
 import { Faculty } from "./Faculty";
+import { RegisteredCourse } from "./RegisteredCourse";
 import { Slot } from "./Slot";
 import { Student } from "./Student";
 
@@ -58,8 +60,12 @@ export class Course extends BaseEntity {
   })
   allowed_slots: Slot[];
 
-  @ManyToMany(() => Student, (student) => student.registered_courses, {
-    cascade: true,
-  })
+  @ManyToMany(() => Student, (student) => student.registered_courses)
   students: Student[];
+
+  @OneToMany(
+    () => RegisteredCourse,
+    (registered_course) => registered_course.course
+  )
+  registered_courses: RegisteredCourse[];
 }

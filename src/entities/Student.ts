@@ -1,12 +1,6 @@
-import {
-  Entity,
-  BaseEntity,
-  Column,
-  PrimaryColumn,
-  ManyToMany,
-  JoinTable,
-} from "typeorm";
-import { Course } from "./Course";
+import { Entity, BaseEntity, Column, PrimaryColumn, OneToMany } from "typeorm";
+
+import { RegisteredCourse } from "./RegisteredCourse";
 
 @Entity("student")
 export class Student extends BaseEntity {
@@ -16,17 +10,10 @@ export class Student extends BaseEntity {
   @Column()
   name: string;
 
-  @ManyToMany(() => Course, (course) => course.students)
-  @JoinTable({
-    name: "students_courses",
-    joinColumn: {
-      name: "student",
-      referencedColumnName: "id",
-    },
-    inverseJoinColumn: {
-      name: "course",
-      referencedColumnName: "id",
-    },
-  })
-  registered_courses: Course[];
+  @OneToMany(
+    () => RegisteredCourse,
+    (registered_course) => registered_course.student,
+    { cascade: true }
+  )
+  registered_courses: RegisteredCourse[];
 }
