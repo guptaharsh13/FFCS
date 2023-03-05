@@ -57,7 +57,7 @@ Link: [http://20.239.186.235](http://20.239.186.235/)
 
 <details>
       <summary>Auth Tokens</summary>
-      <ol style="list-style: none">
+      <ul>
         <li>
           <details>
             <summary>STUDENT_AUTH_TOKEN</summary>
@@ -76,7 +76,7 @@ Link: [http://20.239.186.235](http://20.239.186.235/)
             </p>
           </details>
         </li>
-      </ol>
+      </ul>
     </details>
 
 (only for the above link)
