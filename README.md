@@ -114,28 +114,35 @@ Please run the project locally if the above link is slow or doesn't work, just i
 
 ### Local Run
 
-- Install NPM packages
+Install NPM packages
 
-  ```sh
-  npm i
-  ```
+```sh
+npm i
+```
 
-- Start the app
+Start the app
 
-  ```sh
-  npm start
-  ```
+```sh
+npm start
+```
 
-- Get the STUDENT_AUTH_TOKEN and ADMIN_AUTH_TOKEN
+Get the STUDENT_AUTH_TOKEN and ADMIN_AUTH_TOKEN
 
-  ```sh
-  npm run auth
-  ```
+```sh
+npm run auth
+```
 
 ### Docker Run
 
 ```dh
 docker-compose up --build -d
+```
+
+Get the STUDENT_AUTH_TOKEN and ADMIN_AUTH_TOKEN
+
+```sh
+docker exec -it api sh
+npm run auth
 ```
 
 Now, may access the app on http://localhost:PORT
