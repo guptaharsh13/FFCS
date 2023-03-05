@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { CourseType } from "../entities/Course";
 import { Course } from "../entities/Course";
 

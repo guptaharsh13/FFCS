@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+
 import * as dotenv from "dotenv";
 dotenv.config();
 
@@ -45,6 +46,7 @@ const config: dbConfig = {
 };
 
 if (process.env.POSTGRES_SSL === "require") {
+  console.log("reached");
   config.ssl = true;
 }
 
