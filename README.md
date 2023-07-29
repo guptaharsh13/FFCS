@@ -2,7 +2,7 @@
 
 <div align="center">
 
-  <h3 align="center">FFCS</h3>
+  <h3 align="center">University Credit and Time Table Management System</h3>
 
 </div>
 
